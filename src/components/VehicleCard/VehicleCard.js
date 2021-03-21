@@ -3,7 +3,7 @@ import { Card, Col, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 const VehicleCard = (props) => {
   const { vehicle_type, imageURL } = props.vehicle;
-  console.log(props.vehicle);
+  //console.log(props.vehicle);
   return (
     <Col className="mb-3">
       <Link
@@ -12,7 +12,7 @@ const VehicleCard = (props) => {
       >
         <Card
           style={{ width: "170px", borderRadius: "10px" }}
-          className="d-flex justify-content-center align-items-center p-3 shadow"
+          className="d-flex justify-content-around align-items-center px-4 py-4 shadow"
         >
           <Image
             src={imageURL}

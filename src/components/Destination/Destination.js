@@ -5,6 +5,7 @@ import { UserContext } from "../../App";
 import { Link, useParams } from "react-router-dom";
 import data from "../../Data/data.json";
 import { SupervisorAccountOutlined } from "@material-ui/icons";
+import Map from "../Map/Map";
 const Destination = (props) => {
   const [loginUser, setLoginUser] = useContext(UserContext);
   const { vehicleType } = useParams();
@@ -17,7 +18,7 @@ const Destination = (props) => {
     const selecteditem = vehicles.find((v) => v.vehicle_type === vehicleType);
     setSelectedVehicle(selecteditem);
     console.log(selecteditem);
-  }, []);
+  }, [vehicleType]);
   const handleClickSearch = () => {
     setSearch("true");
   };
@@ -64,7 +65,7 @@ const Destination = (props) => {
                 search === "false"
                   ? {
                       width: "300px",
-                      height: "230px",
+                      height: "310px",
                       borderRadius: "10px",
                       backgroundColor: "#F0F2F5",
                     }
@@ -100,6 +101,7 @@ const Destination = (props) => {
                       placeholder="Drop Off Point"
                     />
                   </div>
+
                   <Button
                     onClick={handleClickSearch}
                     style={{
@@ -177,7 +179,8 @@ const Destination = (props) => {
             </Form>
           </Col>
           <Col xs={12} lg={8} className="d-flex justify-content-center">
-            <Image style={{ height: "700px" }} src={mapImage}></Image>
+            <Image style={{ height: "350px" }} src={mapImage}></Image>
+            <Map />
           </Col>
         </Row>
       </div>

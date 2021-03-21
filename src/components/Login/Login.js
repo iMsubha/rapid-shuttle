@@ -28,6 +28,7 @@ const Login = () => {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
     error: "",
     success: "",
   });
@@ -43,7 +44,7 @@ const Login = () => {
     if (e.target.name === "email") {
       isFieldValid = /\S+@\S+\.\S+/.test(e.target.value);
     }
-    if (e.target.name === "password") {
+    if (e.target.name === "password" || "confirmPassword") {
       const isPasswordValid = e.target.value.length > 6;
       const hasNumber = /\d{1}/.test(e.target.value);
       isFieldValid = isPasswordValid && hasNumber;
@@ -62,30 +63,34 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     //newUser &&
-    if (newUser && user.email && user.password) {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(user.email, user.password)
-        .then((res) => {
-          const newUserInfo = { ...user };
-          newUserInfo.error = "";
-          newUserInfo.success = true;
-          setUser(newUserInfo);
-          updateUserName(user.name);
-          const loginUser = {
-            name: user.name,
-            email: user.email,
-          };
-          setLoginUser(loginUser);
-          history.replace(from);
-        })
-        .catch((err) => {
-          console.log(err.message);
-          const newUserInfo = { ...user };
-          newUserInfo.error = err.message;
-          newUserInfo.success = false;
-          setUser(newUserInfo);
-        });
+    if (newUser && user.email && user.password && user.confirmPassword) {
+      if (user.confirmPassword === user.password) {
+        console.log("con", user.confirmPassword);
+        console.log("pass", user.password);
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(user.email, user.password)
+          .then((res) => {
+            const newUserInfo = { ...user };
+            newUserInfo.error = "";
+            newUserInfo.success = true;
+            setUser(newUserInfo);
+            updateUserName(user.name);
+            const loginUser = {
+              name: user.name,
+              email: user.email,
+            };
+            setLoginUser(loginUser);
+            history.replace(from);
+          })
+          .catch((err) => {
+            console.log(err.message);
+            const newUserInfo = { ...user };
+            newUserInfo.error = err.message;
+            newUserInfo.success = false;
+            setUser(newUserInfo);
+          });
+      }
     }
 
     if (!newUser && user.email && user.password) {
@@ -122,7 +127,7 @@ const Login = () => {
         setUser(signInUser);
         setLoginUser(signInUser);
         history.replace(from);
-        console.log(result.user);
+        //console.log(result.user);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -141,14 +146,15 @@ const Login = () => {
           name: displayName,
           email,
         };
-        console.log(displayName);
+        console.log(result.user);
+
         setUser(signInUser);
         setLoginUser(signInUser);
+        history.replace(from);
       })
       .catch((error) => {
         // Handle Errors here.
         const errorMessage = error.message;
-        console.log(errorMessage);
       });
   };
   const updateUserName = (name) => {
@@ -292,7 +298,13 @@ const Login = () => {
           {newUser && (
             <div className="d-flex justify-content-center">
               <p>Already have an account?</p>
-              <Link to={`/login`} style={{ color: "#ff7b54" }}>
+              <Link
+                to={`/login`}
+                onClick={() => {
+                  history.go(0);
+                }}
+                style={{ color: "#ff7b54" }}
+              >
                 Login
               </Link>
             </div>
