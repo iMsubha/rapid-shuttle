@@ -24,9 +24,6 @@ function App() {
           <PrivateRoute path="/destination/:vehicleType">
             <Destination />
           </PrivateRoute>
-          {/* <Route path="/destination">
-            <Destination />
-          </Route> */}
         </Switch>
       </Router>
     </UserContext.Provider>

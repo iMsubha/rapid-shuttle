@@ -27,8 +27,6 @@ const Destination = (props) => {
 
   return (
     <div>
-      {/* <h3>{vehicleType}</h3> */}
-
       <Container>
         <Row className="pt-4">
           <Col>
@@ -72,7 +70,7 @@ const Destination = (props) => {
                     }
                   : {
                       width: "300px",
-                      height: "400px",
+                      height: "450px",
                       borderRadius: "10px",
                       backgroundColor: "#F0F2F5",
                     }
@@ -89,7 +87,7 @@ const Destination = (props) => {
                       style={{ width: "250px", border: "none", height: "35px" }}
                       type="text"
                       name="pickForm"
-                      placeholder="Mirpur-1"
+                      placeholder="Pick Up Point"
                     />
                   </div>
                   <div className="mb-2">
@@ -99,7 +97,7 @@ const Destination = (props) => {
                       style={{ width: "250px", border: "none", height: "35px" }}
                       type="text"
                       name="pickTo"
-                      placeholder="Dhanmondi"
+                      placeholder="Drop Off Point"
                     />
                   </div>
                   <Button
@@ -167,47 +165,16 @@ const Destination = (props) => {
                       ${selectedVehicle.amount * 3}
                     </h6>
                   </div>
+                  <div
+                    className="bg-white p-2 mb-1 d-flex flex-column justify-content-center align-items-center"
+                    style={{ borderRadius: "10px" }}
+                  >
+                    <h6 className="text-dark">Time: {selectedVehicle.time}</h6>
+                    <h6 className="text-dark">Date: {selectedVehicle.date}</h6>
+                  </div>
                 </div>
               )}
-              {/* <div className="mb-2">
-                <label htmlFor="pickTo">Pick To</label>
-                <br />
-                <input
-                  style={{ width: "250px", border: "none", height: "35px" }}
-                  type="text"
-                  name="pickTo"
-                  placeholder="Dhanmondi"
-                />
-              </div> */}
-              <div>
-                {/* <div style={{ backgroundColor: "#ff7b54" }}>
-                  <p>mirpur</p>
-                  <p>dhanmondi</p>
-                </div> */}
-                {/* <Button
-                  onClick={handleClickSearch}
-                  style={{
-                    backgroundColor: "#ff7b54",
-                    border: "none",
-                    width: "250px",
-                  }}
-                >
-                  Search
-                </Button> */}
-              </div>
             </Form>
-            {/* <Form
-                style={{
-                  backgroundColor: "#F0F2F5",
-                  width: "300px",
-                  height: "230px",
-                }}
-              >
-                <div style={{ backgroundColor: "#ff7b54" }}>
-                  <p>mirpur</p>
-                  <p>dhanmondi</p>
-                </div> 
-              </Form> */}
           </Col>
           <Col xs={12} lg={8} className="d-flex justify-content-center">
             <Image style={{ height: "700px" }} src={mapImage}></Image>

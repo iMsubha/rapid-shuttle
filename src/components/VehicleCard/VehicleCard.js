@@ -12,16 +12,17 @@ const VehicleCard = (props) => {
       >
         <Card
           style={{ width: "170px", borderRadius: "10px" }}
-          className="d-flex justify-content-center align-items-center p-3"
+          className="d-flex justify-content-center align-items-center p-3 shadow"
         >
           <Image
             src={imageURL}
             width={100}
             height={100}
-            className="p-2"
+            className="p-2 mb-2"
           ></Image>
-          {/* onClick={() => handleBook(vehicle_type)} */}
-          <h5>{vehicle_type}</h5>
+          <small className="text-dark font-weight-bolder">
+            {vehicle_type.toUpperCase()}
+          </small>
         </Card>
       </Link>
     </Col>

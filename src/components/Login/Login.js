@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import React, { useContext, useState } from "react";
 import firebaseConfig from "../../components/Login/firebase.config";
 import { Form } from "react-bootstrap";
@@ -8,6 +8,8 @@ import "firebase/auth";
 import Navigation from "../Navigation/Navigation";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { UserContext } from "../../App";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import googleImage from "../../images/google.png";
 
 // Initialize Firebase
 if (!firebase.apps.length) {
@@ -15,8 +17,9 @@ if (!firebase.apps.length) {
 } else {
   firebase.app(); // if already initialized, use that one
 }
-var googleProvider = new firebase.auth.GoogleAuthProvider();
-var fbProvider = new firebase.auth.FacebookAuthProvider();
+
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+const fbProvider = new firebase.auth.FacebookAuthProvider();
 const Login = () => {
   const [loginUser, setLoginUser] = useContext(UserContext);
   const [newUser, setNewUser] = useState(false);
@@ -36,7 +39,6 @@ const Login = () => {
     width: "350px",
   };
   const handleBlur = (e) => {
-    // console.log(e.target.name, e.target.value)
     let isFieldValid;
     if (e.target.name === "email") {
       isFieldValid = /\S+@\S+\.\S+/.test(e.target.value);
@@ -124,7 +126,7 @@ const Login = () => {
       })
       .catch((error) => {
         // Handle Errors here.
-        var errorMessage = error.message;
+        const errorMessage = error.message;
         console.log(errorMessage);
       });
   };
@@ -145,12 +147,12 @@ const Login = () => {
       })
       .catch((error) => {
         // Handle Errors here.
-        var errorMessage = error.message;
+        const errorMessage = error.message;
         console.log(errorMessage);
       });
   };
   const updateUserName = (name) => {
-    var user = firebase.auth().currentUser;
+    const user = firebase.auth().currentUser;
 
     user
       .updateProfile({
@@ -179,11 +181,6 @@ const Login = () => {
       )}
       <div className="container d-flex justify-content-center align-items-center">
         <Form className="border mt-4 p-5">
-          {/* {newUser ? (
-                        <h5 className="mb-4 font-weight-bold">Create an account</h5>
-                    ) : (
-                        <h5 className="mb-4 font-weight-bold">Login</h5>
-                    )} */}
           <h5 className="mb-4 font-weight-bold">
             {newUser ? "Create an account" : "Login"}
           </h5>
@@ -279,18 +276,6 @@ const Login = () => {
               value="Login"
             />
           )}
-          {/* <input
-            onClick={handleSubmit}
-            className="p-2"
-            style={{
-              backgroundColor: "#ff7b54",
-              border: "none",
-              width: "350px",
-              color: "white",
-            }}
-            type="submit"
-            value={newUser ? "Create an account" : "Login"}
-          /> */}
 
           {newUser === false && (
             <div className="d-flex justify-content-center">
@@ -329,6 +314,7 @@ const Login = () => {
           style={inputStyle}
           className="d-block mb-3 bg-white text-dark rounded-pill border"
         >
+          <FacebookIcon color="primary" className="mr-3" />
           Continue with Facebook
         </Button>
         <Button
@@ -336,6 +322,7 @@ const Login = () => {
           style={inputStyle}
           className="d-block mb-3 bg-white text-dark rounded-pill border"
         >
+          <Image src={googleImage} width={18} className="mr-4" />
           Continue with Google
         </Button>
       </div>
